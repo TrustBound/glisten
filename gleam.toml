@@ -1,8 +1,8 @@
-name = "glisten"
-version = "9.0.1"
-description = "a shiny Gleam TCP/TLS server"
+name = "dream_socket_server"
+version = "1.0.0"
+description = "A temporary fork of glisten for Dream: glisten 9.0.1 plus a socket buffer fix. If you are not using Dream, use glisten."
 licences = ["Apache-2.0"]
-repository = { type = "github", user = "rawhat", repo = "glisten" }
+repository = { type = "github", user = "TrustBound", repo = "glisten" }
 gleam = ">= 1.11.0"
 
 [erlang]

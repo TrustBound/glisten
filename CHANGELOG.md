@@ -1,3 +1,11 @@
+# dream_socket_server 1.0.0
+
+First release of the dream_socket_server fork: glisten 9.0.1 plus the two
+changes listed under "Unreleased" below.
+
+- Stop setting `buffer` on the socket to the `recbuf` size
+- Add `with_buffer_size` to set the socket `buffer`
+
 # Unreleased
 
 - Stop setting `buffer` on the socket to the `recbuf` size

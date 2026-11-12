@@ -1,3 +1,37 @@
+# dream_socket_server
+
+> **This is a fork of [glisten](https://github.com/rawhat/glisten), published by the [Dream](https://github.com/TrustBound/dream) project. If you are not using Dream, use glisten.**
+>
+> The package is named for what it does, a socket server, so that it does not appear when people search Hex for glisten.
+
+## Why this package exists
+
+glisten is the socket library that mist, and so Dream, runs on. It is written by Alex Manning (rawhat) and its contributors, and it has given a great deal to us and to the rest of the Gleam community. This package is not a replacement for it and not a judgement of it.
+
+We publish this fork for four reasons.
+
+1. **Dream needed a fix that is not released.** glisten set every socket's read buffer to the size of the kernel's receive buffer. Under load that held a large buffer for every read (about 3,000 MB against 155 MB in the same test on macOS, and 139 MB against about 70 MB on Linux) and gave no measurable speed. The fork stops doing that and adds `glisten.with_buffer_size` for anyone who wants a different size. That is two changes, on the branch `socket-buffer-9.0.1`.
+2. **Giving changes back takes time.** Each change goes upstream as its own small pull request, in the maintainer's style, and is reviewed and released on the maintainer's schedule. That is the right way to do it, and it cannot be hurried. We intend to send both.
+3. **Dream could not wait any longer.** This version of Dream has already been delayed too long, and its users need the fixes now.
+4. **Hex and Gleam leave no other way to ship a fixed dependency.** A Hex package may depend only on other Hex packages, so Dream cannot depend on a git fork or a local path. A Gleam package is built only from the real files in its own `src/` folder, so Dream cannot use a git submodule as its source either: we tested it, and the published package comes out with the files in the wrong place. The choices left were to copy glisten's source into Dream, or to publish the fork as its own package. Publishing the fork keeps glisten's code, history and licence in one place, apart from Dream's.
+
+## What you need to know before you use it
+
+- **This package defines the same modules as glisten** (`glisten`, `glisten/...`). A project cannot depend on both `glisten` and `dream_socket_server`. Gleam stops the build with a duplicate module error.
+- **The code is glisten 9.0.1 plus our two changes, and nothing else.** We do not rename, reformat or restyle glisten's source. What is published here is what we send upstream.
+- **It is temporary.** When a glisten release contains the fix, Dream goes back to `glisten`, and this package gets a final release that says so.
+- **Report problems with this package to [TrustBound/glisten](https://github.com/TrustBound/glisten/issues), not to the glisten maintainers.** They did not publish it and do not support it.
+
+## Licence and credit
+
+glisten is licensed under Apache-2.0, and so is this fork. The copyright stays with Alex Manning and the glisten contributors. Our changes are offered under the same licence.
+
+---
+
+*The original glisten README follows.*
+
+---
+
 # glisten
 
 [![Package Version](https://img.shields.io/hexpm/v/glisten)](https://hex.pm/packages/glisten)
