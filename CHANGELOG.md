@@ -1,3 +1,7 @@
+# Unreleased
+
+- Stop setting `buffer` on the socket to the `recbuf` size
+
 # v9.0.1
 
 - Bump `stdlib` to `>=1.0.0`
