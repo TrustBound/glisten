@@ -216,6 +216,7 @@ pub opaque type Builder(state, user_message) {
       ),
     ),
     active_state: options.ActiveState,
+    buffer_size: Option(Int),
   )
 }
 
@@ -290,6 +291,7 @@ pub fn new(
     listener_name: None,
     connection_factory_name: None,
     active_state: options.Once,
+    buffer_size: None,
   )
 }
 
@@ -307,6 +309,15 @@ pub fn with_pool_size(
   size: Int,
 ) -> Builder(state, user_message) {
   Builder(..builder, pool_size: size)
+}
+
+/// Set the size of the user-level buffer of each socket.  By default this is
+/// left to the runtime.
+pub fn with_buffer_size(
+  builder: Builder(state, user_message),
+  size: Int,
+) -> Builder(state, user_message) {
+  Builder(..builder, buffer_size: Some(size))
 }
 
 /// Sets the ALPN supported protocols to include HTTP/2.  It's currently being
@@ -407,6 +418,10 @@ pub fn start(
     |> list.append(case builder.ipv6_support {
       True -> [options.Ipv6]
       False -> []
+    })
+    |> list.append(case builder.buffer_size {
+      Some(size) -> [options.Buffer(size)]
+      None -> []
     })
     |> list.append(case builder.tls_options {
       Some(opts) -> [options.CertKeyConfig(opts)]
