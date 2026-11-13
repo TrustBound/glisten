@@ -1,12 +1,16 @@
 # dream_socket_server 1.0.0
 
-First release of the dream_socket_server fork: glisten 9.0.1 plus the two
-changes listed under "Unreleased" below.
+First release of the dream_socket_server fork. It is glisten 9.0.1 with the
+changes below and nothing else.
 
-- Stop setting `buffer` on the socket to the `recbuf` size
-- Add `with_buffer_size` to set the socket `buffer`
+Package changes:
 
-# Unreleased
+- The package is named `dream_socket_server`. The modules keep their names
+  (`glisten`, `glisten/...`)
+- Add `test/dream_socket_server_test.gleam` so that `gleam test` runs the
+  existing tests under the new package name
+
+Changes to glisten, each its own commit on the branch `socket-buffer-9.0.1`:
 
 - Stop setting `buffer` on the socket to the `recbuf` size
 - Add `with_buffer_size` to set the socket `buffer`

@@ -22,6 +22,28 @@ We publish this fork for four reasons.
 - **It is temporary.** When a glisten release contains the fix, Dream goes back to `glisten`, and this package gets a final release that says so.
 - **Report problems with this package to [TrustBound/glisten](https://github.com/TrustBound/glisten/issues), not to the glisten maintainers.** They did not publish it and do not support it.
 
+## What is different from glisten 9.0.1
+
+The package differs from glisten 9.0.1 in three ways. Nothing else is
+changed: no source file is renamed, reformatted or restyled.
+
+1. **The package name.** It is `dream_socket_server`. The modules are still
+   `glisten` and `glisten/...`.
+2. **Two changes to the code.** Each one is its own commit with a test.
+   - Stop setting `buffer` on the socket to the `recbuf` size. glisten set
+     every socket's read buffer to the size of the kernel's receive buffer,
+     which held a large buffer for every read under load.
+   - Add `glisten.with_buffer_size` to set the socket `buffer`, for anyone
+     who wants a different size.
+
+3. **Three files for the package itself.** This notice at the top of the
+   README, the `dream_socket_server 1.0.0` entry in `CHANGELOG.md`, and
+   `test/dream_socket_server_test.gleam`, which lets `gleam test` run the
+   existing tests under the new package name.
+
+To see every changed line, compare the branch with the upstream release:
+<https://github.com/rawhat/glisten/compare/v9.0.1...TrustBound:glisten:dream-socket-server>
+
 ## Licence and credit
 
 glisten is licensed under Apache-2.0, and so is this fork. The copyright stays with Alex Manning and the glisten contributors. Our changes are offered under the same licence.
